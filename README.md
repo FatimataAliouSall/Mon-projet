@@ -24,7 +24,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 2. **Accédez au dossier du projet :**
 
     ```bash
-    cd survey-app
+    cd abc-survey-app
     ```
 
 3. **Installez les dépendances :**
