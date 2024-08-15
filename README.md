@@ -72,6 +72,15 @@ Cette fonction permet de se connecter à la base de données MongoDB en utilisan
 
 2. src/surveyController.js
 Fonction : createSurvey(surveyData)
+--structure surveyData :
+id (int),
+name (string),
+description (string),
+createdAt (date)
+createdBy (objet) {employeName (string),
+employeeRole (string)}
+
+
 Cette fonction permet de créer une nouvelle enquête (survey) dans la collection surveys de MongoDB.
 Fonction : getSurveyById(id)
 Cette fonction récupère une enquête spécifique à partir de la base de données en utilisant son ID.
@@ -82,6 +91,12 @@ Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
 3. src/questionController.js
 Fonction : createQuestion(questionData)
+--structure questionData :
+id (int),
+serveyId (int),
+questionTitle (string),
+option [table string]
+
 Cette fonction permet de créer une nouvelle question dans la collection questions de MongoDB.
 Fonction : getQuestionById(id)
 Cette fonction récupère une question spécifique à partir de la base de données en utilisant son ID.
@@ -93,6 +108,11 @@ Cette fonction supprime une question de la base de données en utilisant son ID.
 
 4. src/answerController.js
 Fonction : createAnswer(answerData)
+structure answerData :
+id (int),
+questionId (int),
+answerText (string),
+respondent (objet) {name (string),email (string)}
 Cette fonction permet de créer une nouvelle réponse dans la collection answers de MongoDB.
 Fonction : getAnswerById(id)
 Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction en utilisant son ID.
