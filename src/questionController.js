@@ -1,5 +1,6 @@
 const { getDb } = require('./config/database');
 const { connectToDatabase } = require('./config/database');
+
 async function createQuestion(questionData) {
     const db = getDb();
     const existingAnswer = await db.collection('Questions').findOne({ id: questionData.id });

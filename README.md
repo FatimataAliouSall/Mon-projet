@@ -24,7 +24,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 2. **Accédez au dossier du projet :**
 
     ```bash
-    cd abc-survey-app
+    cd Survey-app
     ```
 
 3. **Installez les dépendances :**
@@ -58,68 +58,61 @@ L'application `Survey App` permet d'effectuer les opérations suivantes :
 
 Le projet est organisé de manière modulaire, avec les composants suivants :
 
-**`src/config/database.js` : Gère la connexion à la base de données MongoDB.
-**`src/index.js` : Point d'entrée principal de l'application, où les opérations CRUD sont exécutées.
-**`src/surveyController.js` : Contient la logique pour les opérations CRUD sur les fiches d'enquête.
-**`src/questionController.js` : Contient la logique pour les opérations CRUD sur les questions d'enquête.
-**`src/answerController.js` : Contient la logique pour les opérations CRUD sur les réponses d'enquête.
+***`src/config/database.js` :*** Gère la connexion à la base de données MongoDB.
+
+***`src/index.js` :*** Point d'entrée principal de l'application, où les opérations CRUD sont exécutées.
+***`src/surveyController.js` :*** Contient la logique pour les opérations CRUD sur les fiches d'enquête.
+***`src/questionController.js` :*** Contient la logique pour les opérations CRUD sur les questions d'enquête.
+***`src/answerController.js` :*** Contient la logique pour les opérations CRUD sur les réponses d'enquête.
 
 
 ## Fonctions des modules et documentation 
 1. config/database.js
-**Fonction : connectToDatabase()
-Cette fonction permet de se connecter à la base de données MongoDB en utilisant le module MongoClient. Elle établit une connexion unique que les autres modules peuvent réutiliser.
+    connectToDatabase()
+    Cette fonction permet de se connecter à la base de données MongoDB en utilisant le module MongoClient. Elle établit une connexion unique que les autres modules peuvent réutiliser.
 
 2. src/surveyController.js
-Fonction : createSurvey(surveyData)
---structure surveyData :
-id (int),
-name (string),
-description (string),
-createdAt (date)
-createdBy (objet) {employeName (string),
-employeeRole (string)}
+    createSurvey(surveyData)
+    --structure surveyData :
+    id (int),
+    name (string),
+    description (string),
+    createdAt (date)
+    createdBy (objet) {employeName (string),
+    employeeRole (string)}
 
-
-Cette fonction permet de créer une nouvelle enquête (survey) dans la collection surveys de MongoDB.
-Fonction : getSurveyById(id)
-Cette fonction récupère une enquête spécifique à partir de la base de données en utilisant son ID.
-Fonction : updateSurvey(id, updateData)
-Cette fonction met à jour une enquête existante dans la base de données en utilisant son ID.
-Fonction : deleteSurvey(id)
-Cette fonction supprime une enquête de la base de données en utilisant son ID.
+    Cette fonction permet de créer une nouvelle enquête (survey) dans la collection surveys de MongoDB.
+getSurveyById(id)
+    Cette fonction récupère une enquête spécifique à partir de la base de données en utilisant son ID.
+updateSurvey(id, updateData)
+    Cette fonction met à jour une enquête existante dans la base de données en utilisant son ID.
+deleteSurvey(id)
+    Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
 3. src/questionController.js
-Fonction : createQuestion(questionData)
---structure questionData :
-id (int),
-serveyId (int),
-questionTitle (string),
-option [table string]
+ createQuestion(questionData)
+    --structure questionData :
+    id (int),
+    serveyId (int),
+    questionTitle (string),
+    option [table string]
 
-Cette fonction permet de créer une nouvelle question dans la collection questions de MongoDB.
-Fonction : getQuestionById(id)
-Cette fonction récupère une question spécifique à partir de la base de données en utilisant son ID.
-Fonction : updateQuestion(id, updateData)
-Cette fonction met à jour une question existante dans la base de données en utilisant son ID.
-Fonction : deleteQuestion(id)
-Cette fonction supprime une question de la base de données en utilisant son ID.
+    Cette fonction permet de créer une nouvelle question dans la collection questions de MongoDB.getQuestionById(id)
+    Cette fonction récupère une question spécifique à partir de la base de données en utilisant son ID.updateQuestion(id, updateData)
+    Cette fonction met à jour une question existante dans la base de données en utilisant son ID.deleteQuestion(id)
+    Cette fonction supprime une question de la base de données en utilisant son ID.
 
 
-4. src/answerController.js
-Fonction : createAnswer(answerData)
+4. src/answerController.jscreateAnswer(answerData)
 structure answerData :
-id (int),
-questionId (int),
-answerText (string),
-respondent (objet) {name (string),email (string)}
-Cette fonction permet de créer une nouvelle réponse dans la collection answers de MongoDB.
-Fonction : getAnswerById(id)
-Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction en utilisant son ID.
-Fonction : updateAnswer(id, updateData)
-Cette fonction met à jour une réponse existante dans la collection answers de la base de données customer_satisfaction en utilisant son ID.
-Fonction : deleteAnswer(id)
-Cette fonction supprime une réponse de la collection answers de la base de données customer_satisfaction en utilisant son ID.
+    id (int),
+    questionId (int),
+    answerText (string),
+    respondent (objet) {name (string),email (string)}
+    Cette fonction permet de créer une nouvelle réponse dans la collection answers de MongoDB.getAnswerById(id)
+    Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction en utilisant son ID.updateAnswer(id, updateData)
+    Cette fonction met à jour une réponse existante dans la collection answers de la base de données customer_satisfaction en utilisant son ID.deleteAnswer(id)
+    Cette fonction supprime une réponse de la collection answers de la base de données customer_satisfaction en utilisant son ID.
 
 ## Utilisation
 
