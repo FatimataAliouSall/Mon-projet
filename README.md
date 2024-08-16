@@ -67,64 +67,68 @@ Le projet est organisé de manière modulaire, avec les composants suivants :
 
 
 ## Fonctions des modules et documentation 
-1. config/database.js
-connectToDatabase()
-Cette fonction permet de se connecter à la base  de données MongoDB en utilisant le module MongoClient. Elle établit une connexion unique que les autres modules peuvent réutiliser.
+
 
 2. src/surveyController.js
-createSurvey(surveyData)
---structure surveyData :
-id (int),
+- createSurvey({id (int),
 name (string),
 description (string),
 createdAt (date)
 createdBy (objet) {employeName (string),
 employeeRole (string)}
+})
+
 
 Cette fonction permet de créer une nouvelle enquête (survey) dans la collection surveys de MongoDB.
 
-getSurveyById(id)
-Cette fonction récupère une enquête spécifique à partir de la base de données en utilisant son ID.
+- getSurveyById()
+Cette fonction récupère une enquête spécifique à partir de la base de données.
 
-updateSurvey(id, updateData)
+- updateSurvey(id (int), {name (string),
+description (string),
+createdAt (date)
+createdBy (objet) {employeName (string),
+employeeRole (string)}})
 Cette fonction met à jour une enquête existante dans la base de données en utilisant son ID.
 
-deleteSurvey(id)
+- deleteSurvey(id (int))
 Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
 3. src/questionController.js
-createQuestion(questionData)
-structure questionData :
-id (int),
+- createQuestion({id (int),
 serveyId (int),
 questionTitle (string),
-option [table string]
+option (array)})
+
 
 Cette fonction permet de créer une nouvelle question dans la collection questions de MongoDB.
 
-getQuestionById(id)
-Cette fonction récupère une question spécifique à partir de la base de données en utilisant son ID.
+- getQuestionById()
+Cette fonction récupère une question spécifique à partir de la base de données .
 
-updateQuestion(id, updateData)
+- updateQuestion(id, {serveyId (int),
+questionTitle (string),
+option (array)})
 Cette fonction met à jour une question existante dans la base de données en utilisant son ID.
-deleteQuestion(id)
+- deleteQuestion(id (int))
 Cette fonction supprime une question de la base de données en utilisant son ID.
 
 
-4. src/answerController.jscreateAnswer(answerData)
-structure answerData : 
-
-questionId (int),
+4. src/answerController.js
+- createAnswer({questionId (int),
 answerText (string),
 respondent (objet) {name (string),
-email (string)}
+email (string)}})
+
 Cette fonction permet de créer une nouvelle réponse dans la collection answers de MongoDB.
 
-getAnswerById(id)
-Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction en utilisant son ID.
+- getAnswerById()
+Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction.
 
-updateAnswer(id, updateData)
-Cette fonction met à jour une réponse existante dans la collection answers de la base de données customer_satisfaction en utilisant son ID.deleteAnswer(id)
+- updateAnswer(id, {answerText (string),
+respondent (objet) {name (string),
+email (string)}})
+Cette fonction met à jour une réponse existante dans la collection answers de la base de données customer_satisfaction en utilisant son ID.- deleteAnswer(id)
 
 Cette fonction supprime une réponse de la collection answers de la base de données customer_satisfaction en utilisant son ID.
 
@@ -144,5 +148,4 @@ Merci à tous les contributeurs et utilisateurs qui ont soutenu ce projet.
 
 ## Authors
 
-{Fatimata Aliou Sall}(https://github.com/FatimataAliouSall/)
-
+{Fatimata Aliou Sall} (https://github.com/FatimataAliouSall/)

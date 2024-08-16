@@ -1,31 +1,67 @@
 const { getDb } = require('./config/database');
-// const { connectToDatabase } = require('./config/database');
 async function createAnswer(answerData) {
-    const db = getDb();
-    const existingAnswer = await db.collection('Questions').findOne({ id: answerData.id });
-    if (existingAnswer) {
-        throw new Error(`La réponse avec l'ID ${answerData.id} existe déjà.`);
+    try {
+        const db = getDb();
+        const existingAnswer = await db.collection('answers').findOne({ id: answerData.id });
+        if (existingAnswer) {
+            throw new Error(`La answer avec l'ID ${answerData.id} existe déjà.`);
+        }
+        const result = await db.collection('answers').insertOne(answerData);
+        console.log("answer ajouté");
+        
+        return result.insertedId;
+    } catch (error) {
+        console.log(error.message)
     }
-    const result = await db.collection('answers').insertOne(answerData);
-    return result;
 }
+
+
 
 async function getAllAnswer() {
-    const db = getDb();
-    const answer = await db.collection('answers').find().toArray();
-    return answer;
+    
+    try {
+        const db = getDb();
+        const answer = await db.collection('answers').find({ }).toArray();
+        if (answer.length === 0) {
+            throw new Error("aucune answer n'est trouvée")
+        }
+        console.log('answers:', answer);
+    } catch (error) {
+        console.log(error.message)
+    }
 }
+
 
 async function updateAnswer(id, updateData) {
-    const db = getDb();
-    const result = await db.collection('answers').updateOne({ id: id }, { $set: updateData });
-    return result;
+    try {
+        const db = getDb();
+        const existingAnswer = await db.collection('answers').findOne({ id: id });
+        if (!existingAnswer) {
+            throw new Error(`La answer avec l'ID ${id} n'existe pas.`);
+        }
+        const result = await db.collection('answers').updateOne({ id }, { $set: updateData });
+        console.log('answers est modifiée.');
+        return result;
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
+
+
 async function deleteAnswer(id) {
-    const db = getDb();
-    const result = await db.collection('answers').deleteOne({ id: id });
-    return result;
+    try {
+        const db = getDb();
+        const existingAnswer = await db.collection('answers').findOne({ id: id });
+        if (!existingAnswer) {
+            throw new Error(`La answer avec l'ID ${id} n'existe pas.`);
+        }
+        const result = await db.collection('answers').deleteOne({ id: id });
+        console.log('Answer deleted.');
+        return result;
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 module.exports = { createAnswer, getAllAnswer, updateAnswer, deleteAnswer };
