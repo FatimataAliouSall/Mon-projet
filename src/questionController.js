@@ -1,5 +1,5 @@
 const { getDb } = require('./config/database');
-const { connectToDatabase } = require('./config/database');
+// const { connectToDatabase } = require('./config/database');
 
 async function createQuestion(questionData) {
     const db = getDb();
@@ -8,12 +8,14 @@ async function createQuestion(questionData) {
         throw new Error(`La réponse avec l'ID ${questionData.id} existe déjà.`);
     }
     const result = await db.collection('questions').insertOne(questionData);
+    console.log("question ajouté");
+    
     return result;
 }
 
-async function getQuestionById(id) {
+async function getQuestionById() {
     const db = getDb();
-    const question = await db.collection('questions').findOne({ id: id });
+    const question = await db.collection('questions').find({ }).toArray();
     return question;
 }
 

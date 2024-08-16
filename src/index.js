@@ -1,75 +1,81 @@
 const { connectToDatabase } = require('./config/database');
-const { createSurvey, getSurveyById, updateSurvey, deleteSurvey } = require('./surveyController');
+const { createSurvey, getAllSurveys, updateSurvey, deleteSurvey } = require('./surveyController');
 const { createQuestion, getQuestionById, updateQuestion, deleteQuestion } = require('./questionController');
-const { createAnswer, getAnswerById, updateAnswer, deleteAnswer } = require('./answerController');
+const { createAnswer, getAllAnswer, updateAnswer, deleteAnswer } = require('./answerController');
 
 async function main() {
     await connectToDatabase();
+        
+        // Appelle des fonctions après l'initialisation de la base de données
+        // const surveys = await getAllSurveys();
+        // console.log(surveys);
 
-    const surveyData = {
-        id: 1,
-        name: "Enquête de Satisfaction 002",
-        description: "Nouvelle enquête sur la satisfaction client.",
-        createdAt: new Date(),
-        createdBy: {
-            employeeName: "John Doe",
-            employeeRole: "Manager"
-        }
-    };
+    // const surveyData = {
+    //     id: 1,
+    //     name: "Enquête de Satisfaction 002",
+    //     description: "Nouvelle enquête sur la satisfaction client.",
+    //     createdAt: new Date(),
+    //     createdBy: {
+    //         employeeName: "John Doe",
+    //         employeeRole: "Manager"
+    //     }
+    // };
 
-    const surveyResult = await createSurvey(surveyData);
-    console.log('Survey created with ID:', surveyResult.insertedId);
+    // const surveyResult = await createSurvey(surveyData);
+    // console.log('Survey created with ID:', surveyResult.insertedId);
 
-    const survey = await getSurveyById(surveyResult.insertedId);
-    console.log('Survey:', survey);
+    // const survey = await getSurveyById();
+    // console.log('Survey:', survey);
 
-    await updateSurvey(surveyResult.insertedId, { name: "Updated Survey Name" });
-    console.log('Survey updated.');
+    // await updateSurvey(1, { name: "Updated Survey Name" });
+    
+   
 
-    await deleteSurvey(surveyResult.insertedId);
-    console.log('Survey deleted.');
+
+    // await deleteSurvey(2);
+    // console.log('Survey deleted.');
 
     
     const questionData = {
-        surveyId: surveyResult.insertedId, 
+        
         id: 1,
         questionTitle: "Comment évalueriez-vous notre service ?",
         options: ["Très satisfait", "Satisfait", "Peu satisfait", "Pas du tout satisfait"]
     };
 
-    const questionResult = await createQuestion(questionData);
-    console.log('Question created with ID:', questionResult.insertedId);
+    // const questionResult = await createQuestion(questionData);
+    
 
-    const question = await getQuestionById(questionResult.insertedId);
+    const question = await getQuestionById();
     console.log('Question:', question);
 
-    await updateQuestion(questionResult.insertedId, { questionTitle: "Updated Question Title" });
-    console.log('Question updated.');
+    // await updateQuestion(1, { questionTitle: "Updated Question Title" });
+    // console.log('Question updated.');
 
-    await deleteQuestion(questionResult.insertedId);
-    console.log('Question deleted.');
+    // await deleteQuestion(3);
+    // console.log('Question deleted.');
 
     
-    const answerData = {
-        id: 1,
-        questionId: questionResult.insertedId, 
-        answerText: "Très satisfait",
-        respondent: {
-            name: "Jane Doe",
-            email: "jane.doe@example.com"
-        }
-    };
+    // const answerData = {
+    //     id: 1,
+    //     questionId: 2, 
+    //     answerText: "Très satisfait",
+    //     respondent: {
+    //         name: "Jane Doe",
+    //         email: "jane.doe@example.com"
+    //     }
+    // };
 
-    const answerResult = await createAnswer(answerData);
-    console.log('Answer created with ID:', answerResult.insertedId);
+    // const answerResult = await createAnswer(answerData);
+    // console.log('Answer created with ID:', answerResult.insertedId);
 
-    const answer = await getAnswerById(answerResult.insertedId);
-    console.log('Answer:', answer);
+    // const answer = await getAllAnswer();
+    // console.log('Answer:', answer);
 
-    await updateAnswer(answerResult.insertedId, { answerText: "Updated Answer Text" });
-    console.log('Answer updated.');
+    // await updateAnswer(1, { answerText: "Updated Answer Text" });
+    // console.log('Answer updated.');
 
-    await deleteAnswer(answerResult.insertedId);
+    await deleteAnswer(1);
     console.log('Answer deleted.');
 }
 

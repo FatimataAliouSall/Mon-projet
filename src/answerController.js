@@ -1,5 +1,5 @@
 const { getDb } = require('./config/database');
-const { connectToDatabase } = require('./config/database');
+// const { connectToDatabase } = require('./config/database');
 async function createAnswer(answerData) {
     const db = getDb();
     const existingAnswer = await db.collection('Questions').findOne({ id: answerData.id });
@@ -10,11 +10,12 @@ async function createAnswer(answerData) {
     return result;
 }
 
-async function getAnswerById(id) {
+async function getAllAnswer() {
     const db = getDb();
-    const answer = await db.collection('answers').findOne({ id: id });
+    const answer = await db.collection('answers').find().toArray();
     return answer;
 }
+
 async function updateAnswer(id, updateData) {
     const db = getDb();
     const result = await db.collection('answers').updateOne({ id: id }, { $set: updateData });
@@ -27,4 +28,4 @@ async function deleteAnswer(id) {
     return result;
 }
 
-module.exports = { createAnswer, getAnswerById, updateAnswer, deleteAnswer };
+module.exports = { createAnswer, getAllAnswer, updateAnswer, deleteAnswer };

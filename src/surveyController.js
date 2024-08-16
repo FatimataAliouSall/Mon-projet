@@ -1,5 +1,5 @@
 const { getDb } = require('./config/database');
-const { connectToDatabase } = require('./config/database');
+// const { connectToDatabase } = require('./config/database');
 
 async function createSurvey(surveyData) {
     const db = getDb();
@@ -8,18 +8,23 @@ async function createSurvey(surveyData) {
         throw new Error(`La réponse avec l'ID ${surveyData.id} existe déjà.`);
     }
     const result = await db.collection('surveys').insertOne(surveyData);
+    console.log("Enquete ajouté");
+    
     return result;
 }
 
-async function getSurveyById(id) {
+async function getAllSurveys() {
     const db = getDb();
-    const survey = await db.collection('surveys').findOne({ id: id });
-    return survey;
+    const surveys = await db.collection('surveys').find().toArray();
+    return surveys;
 }
+
 
 async function updateSurvey(id, updateData) {
     const db = getDb();
     const result = await db.collection('surveys').updateOne({ id: id }, { $set: updateData });
+    console.log("Equete modifié");
+    
     return result;
 }
 
@@ -29,4 +34,4 @@ async function deleteSurvey(id) {
     return result;
 }
 
-module.exports = { createSurvey, getSurveyById, updateSurvey, deleteSurvey };
+module.exports = {createSurvey, getAllSurveys, updateSurvey, deleteSurvey };
