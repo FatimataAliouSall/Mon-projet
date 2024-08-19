@@ -71,14 +71,16 @@ Le projet est organisé de manière modulaire, avec les composants suivants :
 
 #### surveyController.js
 ``createSurvey(survey)``
-survey :
-- id (int),
-- name (string),
-- description (string),
-- createdAt (date)
-- createdBy (objet) : 
-    - employeName (string),
-    - employeeRole (string)
+
+    survey :
+
+    - id (int),
+    - name (string),
+    - description (string),
+    - createdAt (date)
+    - createdBy (objet) : 
+        - employeName (string),
+        - employeeRole (string)
 
 Cette fonction permet de créer une nouvelle enquête et retourne l'insertion.
 
@@ -87,14 +89,16 @@ Cette fonction récupère et affiche toute les enquetes existante .
 
 
  updateSurvey(id (int), survey)
- survey :
-- id (int),
-- name (string),
-- description (string),
-- createdAt (date)
-- createdBy (objet) : 
-    - employeName (string),
-    - employeeRole (string)
+
+    survey :
+
+    - id (int),
+    - name (string),
+    - description (string),
+    - createdAt (date)
+    - createdBy (objet) : 
+        - employeName (string),
+        - employeeRole (string)
     Cette fonction met à jour une enquête existante et retourne la modification.
 
 - deleteSurvey(id (int))
@@ -102,12 +106,16 @@ Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
 #### questionController.js
 ``createQuestion(question)``
-question :
-- id (int),
-- serveyId (int),
-- questionTitle (string),
-- option (array) :
-    - 
+
+    question :
+
+    - id (int),
+    - serveyId (int),
+    - questionTitle (string),
+    - option (array) :
+        - minValue(int)
+        - maxValue(int)
+        - step(int)
 
 Cette fonction permet de créer une nouvelle question et retourne l'insertion.
 
@@ -116,11 +124,14 @@ Cette fonction récupère et affiche toute les question existante .
 
 ``updateQuestion(id, question)``
 
-questtion :
-- serveyId (int),
-- questionTitle (string),
-- option (array) :
-    - 
+    questtion :
+
+    - serveyId (int),
+    - questionTitle (string),
+    - option (array) :
+        - minValue(int)
+        - maxValue(int)
+        - step(int)
 
 Cette fonction met à jour une question existante  en utilisant son ID.
 
@@ -132,11 +143,13 @@ Cette fonction supprime une question de la base de données en utilisant son ID.
 #### answerController.js
 ``createAnswer(answer)``
 
-- questionId (int),
-- answerText (string),
-- respondent (objet) 
-    - name (string),
-- email (string)
+    answer:
+    
+    - questionId (int),
+    - answerText (string),
+    - respondent (objet) 
+        - name (string),
+    - email (string)
 
 Cette fonction permet de créer une nouvelle réponse .
 
@@ -144,6 +157,9 @@ Cette fonction permet de créer une nouvelle réponse .
 Cette fonction récupère et affiche toute les reponse existante .
 
 ``updateAnswer(id(int), answer)``
+
+answer :
+
 - questionId (int),
 - answerText (string),
 - respondent (objet) 
