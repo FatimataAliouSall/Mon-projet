@@ -18,7 +18,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 1. **Clonez le repository :**
 
     ```bash
-    git clone <https://github.com/FatimataAliouSall/Mon-projet.git>
+    git clone https://github.com/FatimataAliouSall/Survey-app.git
     ```
 
 2. **Accédez au dossier du projet :**
@@ -69,68 +69,92 @@ Le projet est organisé de manière modulaire, avec les composants suivants :
 ## Fonctions des modules et documentation 
 
 
-2. src/surveyController.js
-- createSurvey({id (int),
-name (string),
-description (string),
-createdAt (date)
-createdBy (objet) {employeName (string),
-employeeRole (string)}
-})
+#### surveyController.js
+``createSurvey(survey)``
+survey :
+- id (int),
+- name (string),
+- description (string),
+- createdAt (date)
+- createdBy (objet) : 
+    - employeName (string),
+    - employeeRole (string)
+
+Cette fonction permet de créer une nouvelle enquête et retourne l'insertion.
+
+ ``getAllSurveys()``
+Cette fonction récupère et affiche toute les enquetes existante .
 
 
-Cette fonction permet de créer une nouvelle enquête (survey) dans la collection surveys de MongoDB.
-
-- getSurveyById()
-Cette fonction récupère une enquête spécifique à partir de la base de données.
-
-- updateSurvey(id (int), {name (string),
-description (string),
-createdAt (date)
-createdBy (objet) {employeName (string),
-employeeRole (string)}})
-Cette fonction met à jour une enquête existante dans la base de données en utilisant son ID.
+ updateSurvey(id (int), survey)
+ survey :
+- id (int),
+- name (string),
+- description (string),
+- createdAt (date)
+- createdBy (objet) : 
+    - employeName (string),
+    - employeeRole (string)
+    Cette fonction met à jour une enquête existante et retourne la modification.
 
 - deleteSurvey(id (int))
 Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
-3. src/questionController.js
-- createQuestion({id (int),
-serveyId (int),
-questionTitle (string),
-option (array)})
+#### questionController.js
+``createQuestion(question)``
+question :
+- id (int),
+- serveyId (int),
+- questionTitle (string),
+- option (array) :
+    - 
+
+Cette fonction permet de créer une nouvelle question et retourne l'insertion.
+
+``getAllQuestion()``
+Cette fonction récupère et affiche toute les question existante .
+
+``updateQuestion(id, question)``
+
+questtion :
+- serveyId (int),
+- questionTitle (string),
+- option (array) :
+    - 
+
+Cette fonction met à jour une question existante  en utilisant son ID.
 
 
-Cette fonction permet de créer une nouvelle question dans la collection questions de MongoDB.
-
-- getQuestionById()
-Cette fonction récupère une question spécifique à partir de la base de données .
-
-- updateQuestion(id, {serveyId (int),
-questionTitle (string),
-option (array)})
-Cette fonction met à jour une question existante dans la base de données en utilisant son ID.
-- deleteQuestion(id (int))
+``deleteQuestion(id (int))``
 Cette fonction supprime une question de la base de données en utilisant son ID.
 
 
-4. src/answerController.js
-- createAnswer({questionId (int),
-answerText (string),
-respondent (objet) {name (string),
-email (string)}})
+#### answerController.js
+``createAnswer(answer)``
 
-Cette fonction permet de créer une nouvelle réponse dans la collection answers de MongoDB.
+- questionId (int),
+- answerText (string),
+- respondent (objet) 
+    - name (string),
+- email (string)
 
-- getAnswerById()
-Cette fonction récupère une réponse spécifique à partir de la collection answers de la base de données customer_satisfaction.
+Cette fonction permet de créer une nouvelle réponse .
 
-- updateAnswer(id, {answerText (string),
-respondent (objet) {name (string),
-email (string)}})
-Cette fonction met à jour une réponse existante dans la collection answers de la base de données customer_satisfaction en utilisant son ID.- deleteAnswer(id)
+- getAllAnswer()
+Cette fonction récupère et affiche toute les reponse existante .
 
-Cette fonction supprime une réponse de la collection answers de la base de données customer_satisfaction en utilisant son ID.
+``updateAnswer(id(int), answer)``
+- questionId (int),
+- answerText (string),
+- respondent (objet) 
+    - name (string),
+- email (string)
+
+Cette fonction met à jour une réponse existante en utilisant son ID.
+
+``deleteAnswer(id)``
+
+Cette fonction supprime une réponse en utilisant son ID.
 
 ## Utilisation
 
