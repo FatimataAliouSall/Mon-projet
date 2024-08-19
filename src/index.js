@@ -1,11 +1,11 @@
-const { connectToDatabase } = require('./config/database');
+
 const { createSurvey, getAllSurveys, updateSurvey, deleteSurvey } = require('./surveyController');
-const { createQuestion, getQuestionById, updateQuestion, deleteQuestion } = require('./questionController');
+const { createQuestion, getAllQuestion, updateQuestion, deleteQuestion } = require('./questionController');
 const { createAnswer, getAllAnswer, updateAnswer, deleteAnswer } = require('./answerController');
 
 async function main() {
-    await connectToDatabase();
-
+    
+    
     const surveyData = {
         id: 1,
         name: "Enquête de Satisfaction 002",
@@ -36,7 +36,7 @@ async function main() {
 
     await createQuestion(questionData);
     
-    await getQuestionById();
+    await getAllQuestion();
    
     await updateQuestion(2, { questionTitle: "Updated Question Title" });
 

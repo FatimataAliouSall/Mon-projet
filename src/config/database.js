@@ -1,26 +1,21 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017'; 
-const client = new MongoClient(uri);
+const url = 'mongodb://localhost:27017/'; 
+const client = new MongoClient(url);
 
-let db;
 
 async function connectToDatabase() {
     try {
         await client.connect();
-        db = client.db('customer_satisfaction');  
+         
+        const db = client.db("customer_satisfaction")
         console.log('Connected to MongoDB');
+        return db;
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
         throw err;  
     }
 }
 
-function getDb() {
-    if (!db) {
-        throw new Error('Database not initialized');
-    }
-    return db;
-}
 
-module.exports = { connectToDatabase, getDb };
+module.exports = { connectToDatabase };

@@ -1,8 +1,8 @@
-const { getDb } = require('./config/database');
+const { connectToDatabase } = require('./config/database');
 
 async function createQuestion(questionData) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('questions').findOne({ id: questionData.id });
         if (existingAnswer) {
             throw new Error(`La réponse avec l'ID ${questionData.id} existe déjà.`);
@@ -16,23 +16,25 @@ async function createQuestion(questionData) {
     }
 }
 
-async function getQuestionById() {
+
+
+
+async function getAllQuestion() {
     
     try {
-        const db = getDb();
+        const db =  await connectToDatabase();
         const question = await db.collection('questions').find({ }).toArray();
         if (question.length === 0) {
             throw new Error("aucune question n'est trouvée")
         }
-        console.log('Question:', question);
+        console.log('questions:', question);
     } catch (error) {
         console.log(error.message)
     }
 }
-
 async function updateQuestion(id, updateData) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const result = await db.collection('questions').updateOne({ id }, { $set: updateData });
         const existingAnswer = await db.collection('questions').findOne({ id: id });
         if (!existingAnswer) {
@@ -48,7 +50,7 @@ async function updateQuestion(id, updateData) {
 
 async function deleteQuestion(id) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('questions').findOne({ id: id });
         if (!existingAnswer) {
             throw new Error(`La question avec l'ID ${id} n'existe pas.`);
@@ -61,4 +63,4 @@ async function deleteQuestion(id) {
     }
 }
 
-module.exports = { createQuestion, getQuestionById, updateQuestion, deleteQuestion };
+module.exports = { createQuestion, getAllQuestion, updateQuestion, deleteQuestion };

@@ -1,7 +1,7 @@
-const { getDb } = require('./config/database');
+const { connectToDatabase } = require('./config/database');
 async function createAnswer(answerData) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('answers').findOne({ id: answerData.id });
         if (existingAnswer) {
             throw new Error(`La answer avec l'ID ${answerData.id} existe déjà.`);
@@ -20,7 +20,7 @@ async function createAnswer(answerData) {
 async function getAllAnswer() {
     
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const answer = await db.collection('answers').find({ }).toArray();
         if (answer.length === 0) {
             throw new Error("aucune answer n'est trouvée")
@@ -34,7 +34,7 @@ async function getAllAnswer() {
 
 async function updateAnswer(id, updateData) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('answers').findOne({ id: id });
         if (!existingAnswer) {
             throw new Error(`La answer avec l'ID ${id} n'existe pas.`);
@@ -51,7 +51,7 @@ async function updateAnswer(id, updateData) {
 
 async function deleteAnswer(id) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('answers').findOne({ id: id });
         if (!existingAnswer) {
             throw new Error(`La answer avec l'ID ${id} n'existe pas.`);

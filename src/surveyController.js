@@ -1,14 +1,14 @@
-const { getDb } = require('./config/database');
+const { connectToDatabase } = require('./config/database');
 
 
 async function createSurvey(surveyData) {
     try {
-        const db = getDb();
-        const existingSurvey = await db.collection('surveys').findOne({ id: surveyData.id });
+        const db = await connectToDatabase();
+        const existingSurvey = await db.collection("surveys").findOne({ id: surveyData.id });
         if (existingSurvey) {
             throw new Error(`La survey avec l'ID ${surveyData.id} existe déjà.`);
         }
-        const result = await db.collection('surveys').insertOne(surveyData);
+        const result = await db.collection("surveys").insertOne(surveyData);
         console.log("survey ajouté");
         
         return result;
@@ -22,7 +22,7 @@ async function createSurvey(surveyData) {
 async function getAllSurveys() {
     
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const survey = await db.collection('surveys').find({ }).toArray();
         if (survey.length === 0) {
             throw new Error("aucune surveys n'est trouvée")
@@ -34,9 +34,12 @@ async function getAllSurveys() {
 }
 
 
+
+
+
 async function updateSurvey(id, updateData) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('surveys').findOne({ id: id });
         if (!existingAnswer) {
             throw new Error(`La surveys avec l'ID ${id} n'existe pas.`);
@@ -53,7 +56,7 @@ async function updateSurvey(id, updateData) {
 
 async function deleteSurvey(id) {
     try {
-        const db = getDb();
+        const db = await connectToDatabase();
         const existingAnswer = await db.collection('surveys').findOne({ id: id });
         if (!existingAnswer) {
             throw new Error(`La survey avec l'ID ${id} n'existe pas.`);
