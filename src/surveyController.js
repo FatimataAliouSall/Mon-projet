@@ -4,18 +4,31 @@ const { connectToDatabase } = require('./config/database');
 async function createSurvey(surveyData) {
     try {
         const db = await connectToDatabase();
+
+        // Vérifier si l'ID du survey existe déjà
         const existingSurvey = await db.collection("surveys").findOne({ id: surveyData.id });
         if (existingSurvey) {
-            throw new Error(`La survey avec l'ID ${surveyData.id} existe déjà.`);
+            throw new Error(`Le survey avec l'ID ${surveyData.id} existe déjà.`);
         }
+
+        // Vérifier si l'ID de la question existe déjà
+        for (const questionId of surveyData.questionIds) {
+            const existingQuestion = await db.collection("questions").findOne({ id: questionId });
+            if (!existingQuestion) {
+                throw new Error(`La question avec l'ID ${questionId} n'existe pas.`);
+            }
+        }
+
+        // Ajouter le nouveau survey
         const result = await db.collection("surveys").insertOne(surveyData);
-        console.log("survey ajouté");
-        
+        console.log("Survey ajouté");
+
         return result;
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
     }
 }
+
 
 
 

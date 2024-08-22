@@ -3,16 +3,26 @@ const { connectToDatabase } = require('./config/database');
 async function createQuestion(questionData) {
     try {
         const db = await connectToDatabase();
-        const existingAnswer = await db.collection('questions').findOne({ id: questionData.id });
-        if (existingAnswer) {
-            throw new Error(`La réponse avec l'ID ${questionData.id} existe déjà.`);
-        }
-        const result = await db.collection('questions').insertOne(questionData);
-        console.log("question ajouté");
+
         
+        const existingQuestion = await db.collection('questions').findOne({ id: questionData.id });
+        if (existingQuestion) {
+            throw new Error(`La question avec l'ID ${questionData.id} existe déjà.`);
+        }
+
+        
+        const existingAnswer = await db.collection('answers').findOne({ id: questionData.answerId });
+        if (existingAnswer) {
+            throw new Error(`La réponse avec l'ID ${questionData.answerId} existe déjà.`);
+        }
+
+        // Ajouter la nouvelle question
+        const result = await db.collection('questions').insertOne(questionData);
+        console.log("Question ajoutée");
+
         return result.insertedId;
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
     }
 }
 

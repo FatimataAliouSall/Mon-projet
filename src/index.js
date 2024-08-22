@@ -1,10 +1,8 @@
-
 const { createSurvey, getAllSurveys, updateSurvey, deleteSurvey } = require('./surveyController');
 const { createQuestion, getAllQuestion, updateQuestion, deleteQuestion } = require('./questionController');
 const { createAnswer, getAllAnswer, updateAnswer, deleteAnswer } = require('./answerController');
 
 async function main() {
-    
     
     const surveyData = {
         id: 1,
@@ -29,9 +27,14 @@ async function main() {
 
     const questionData = {
         
-        id: 2,
-        questionTitle: "Comment évalueriez-vous notre service ?",
-        options: ["Très satisfait", "Satisfait", "Peu satisfait", "Pas du tout satisfait"]
+        id: 1,
+        surveyId: 2,
+        title: "Comment évalueriez-vous notre service ?",
+       options: {
+            minValue: 1,
+            maxValue: 5,
+            step: 1
+        }
     };
 
     await createQuestion(questionData);
@@ -48,7 +51,7 @@ async function main() {
         id: 1,
         questionId: 2, 
         answerText: "Très satisfait",
-        respondent: {
+        response: {
             name: "Jane Doe",
             email: "jane.doe@example.com"
         }

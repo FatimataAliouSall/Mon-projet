@@ -111,7 +111,7 @@ question :
 - id (int),
 - serveyId (int),
 - questionTitle (string),
-- option (array) :
+- option (object) :
     - minValue(int)
     - maxValue(int)
     - step(int)
@@ -127,7 +127,7 @@ questtion :
 
 - serveyId (int),
 - questionTitle (string),
-- option (array) :
+- option (object) :
     - minValue(int)
     - maxValue(int)
     - step(int)
@@ -146,7 +146,7 @@ answer:
 
 - questionId (int),
 - answerText (string),
-- respondent (objet) 
+- response (objet) 
     - name (string),
     - email (string)
 
@@ -161,7 +161,7 @@ answer :
 
 - questionId (int),
 - answerText (string),
-- respondent (objet) 
+- response (objet) 
     - name (string),
     - email (string)
 
