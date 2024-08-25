@@ -1,11 +1,11 @@
-const { createSurvey, getAllSurveys, updateSurvey, deleteSurvey } = require('./surveyController');
-const { createQuestion, getAllQuestion, updateQuestion, deleteQuestion } = require('./questionController');
-const { createAnswer, getAllAnswer, updateAnswer, deleteAnswer } = require('./answerController');
+const { createSurvey, getAllSurveys, updateSurvey, deleteSurvey } = require('./surveyModule');
+const { createQuestion, getAllQuestion, updateQuestion, deleteQuestion } = require('./questionModule');
+const { createAnswer, getAllAnswer, updateAnswer, deleteAnswer } = require('./answerModule');
 
 async function main() {
     
     const surveyData = {
-        id: 1,
+        id: 2,
         name: "Enquête de Satisfaction 002",
         description: "Nouvelle enquête sur la satisfaction client.",
         createdAt: new Date(),
@@ -27,10 +27,11 @@ async function main() {
 
     const questionData = {
         
-        id: 1,
+        id: 2,
         surveyId: 2,
         title: "Comment évalueriez-vous notre service ?",
-       options: {
+        type: "choix multiple",
+        options: {
             minValue: 1,
             maxValue: 5,
             step: 1
@@ -41,20 +42,16 @@ async function main() {
     
     await getAllQuestion();
    
-    await updateQuestion(2, { questionTitle: "Updated Question Title" });
+    await updateQuestion(1, { title: "Updated Question Title" });
+        
 
     await deleteQuestion(1);
 
-   
     
     const answerData = {
         id: 1,
         questionId: 2, 
         answerText: "Très satisfait",
-        response: {
-            name: "Jane Doe",
-            email: "jane.doe@example.com"
-        }
     };
 
     await createAnswer(answerData);
@@ -62,6 +59,7 @@ async function main() {
     await getAllAnswer();
 
     await updateAnswer(1, { answerText: "Updated Answer Text" });
+    
     
     await deleteAnswer(1);
 }

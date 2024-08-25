@@ -11,9 +11,10 @@ async function createQuestion(questionData) {
         }
 
         
-        const existingAnswer = await db.collection('answers').findOne({ id: questionData.answerId });
-        if (existingAnswer) {
-            throw new Error(`La réponse avec l'ID ${questionData.answerId} existe déjà.`);
+        
+        const existingServeys = await db.collection('surveys').findOne({ id: questionData.surveyId });
+        if (!existingServeys) {
+            throw new Error(`La réponse avec l'ID ${questionData.surveyId} existe déjà.`);
         }
 
         // Ajouter la nouvelle question
@@ -46,8 +47,8 @@ async function updateQuestion(id, updateData) {
     try {
         const db = await connectToDatabase();
         const result = await db.collection('questions').updateOne({ id }, { $set: updateData });
-        const existingAnswer = await db.collection('questions').findOne({ id: id });
-        if (!existingAnswer) {
+        const existingQuestion = await db.collection('questions').findOne({ id: id });
+        if (!existingQuestion) {
             throw new Error(`La question avec l'ID ${id} n'existe pas.`);
         }
         console.log('Question est modifiée.');

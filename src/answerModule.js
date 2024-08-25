@@ -6,6 +6,12 @@ async function createAnswer(answerData) {
         if (existingAnswer) {
             throw new Error(`La answer avec l'ID ${answerData.id} existe déjà.`);
         }
+
+        const existingQuestion = await db.collection('questions').findOne({ id: answerData.questionId });
+        if (!existingQuestion) {
+            throw new Error(`La réponse avec l'ID ${questionData.surveyId} existe déjà.`);
+        }
+
         const result = await db.collection('answers').insertOne(answerData);
         console.log("answer ajouté");
         

@@ -11,14 +11,7 @@ async function createSurvey(surveyData) {
             throw new Error(`Le survey avec l'ID ${surveyData.id} existe déjà.`);
         }
 
-        // Vérifier si l'ID de la question existe déjà
-        for (const questionId of surveyData.questionIds) {
-            const existingQuestion = await db.collection("questions").findOne({ id: questionId });
-            if (!existingQuestion) {
-                throw new Error(`La question avec l'ID ${questionId} n'existe pas.`);
-            }
-        }
-
+        
         // Ajouter le nouveau survey
         const result = await db.collection("surveys").insertOne(surveyData);
         console.log("Survey ajouté");
