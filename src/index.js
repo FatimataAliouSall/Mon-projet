@@ -58,7 +58,7 @@ async function main() {
 
     await getAllAnswer();
 
-    await updateAnswer(1, { answerText: "Updated Answer Text" });
+    await updateAnswer(1, { title: "Updated Answer Title" });
     
     
     await deleteAnswer(1);
