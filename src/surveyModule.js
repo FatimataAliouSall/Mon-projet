@@ -8,7 +8,7 @@ async function createSurvey(surveyData) {
         // Vérifier si l'ID du survey existe déjà
         const existingSurvey = await db.collection("surveys").findOne({ id: surveyData.id });
         if (existingSurvey) {
-            throw new Error(`Le survey avec l'ID ${surveyData.id} existe déjà.`);
+            throw new Error(`La survey avec l'ID ${surveyData.id} existe déjà.`);
         }
 
         
@@ -46,12 +46,12 @@ async function getAllSurveys() {
 async function updateSurvey(id, updateData) {
     try {
         const db = await connectToDatabase();
-        const existingAnswer = await db.collection('surveys').findOne({ id: id });
-        if (!existingAnswer) {
-            throw new Error(`La surveys avec l'ID ${id} n'existe pas.`);
+        const existingSurvey = await db.collection('surveys').findOne({ id: id });
+        if (!existingSurvey) {
+            throw new Error(`La survey avec l'ID ${id} n'existe pas.`);
         }
         const result = await db.collection('surveys').updateOne({ id }, { $set: updateData });
-        console.log('surveys est modifiée.');
+        console.log('survey est modifiée.');
         return result;
     } catch (error) {
         console.log(error.message)
@@ -63,8 +63,8 @@ async function updateSurvey(id, updateData) {
 async function deleteSurvey(id) {
     try {
         const db = await connectToDatabase();
-        const existingAnswer = await db.collection('surveys').findOne({ id: id });
-        if (!existingAnswer) {
+        const existingSurvey = await db.collection('surveys').findOne({ id: id });
+        if (!existingSurvey) {
             throw new Error(`La survey avec l'ID ${id} n'existe pas.`);
         }
         const result = await db.collection('surveys').deleteOne({ id: id });

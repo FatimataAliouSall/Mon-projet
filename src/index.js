@@ -51,7 +51,7 @@ async function main() {
     const answerData = {
         id: 1,
         questionId: 2, 
-        answerText: "Très satisfait",
+        title: "Très satisfait",
     };
 
     await createAnswer(answerData);
