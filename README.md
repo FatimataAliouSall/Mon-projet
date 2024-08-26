@@ -69,7 +69,7 @@ Le projet est organisé de manière modulaire, avec les composants suivants :
 ## Fonctions des modules et documentation 
 
 
-#### surveyController.js
+#### surveyModule.js
 ``createSurvey(survey)``
 
 survey :
@@ -103,14 +103,15 @@ survey :
 - deleteSurvey(id (int))
 Cette fonction supprime une enquête de la base de données en utilisant son ID.
 
-#### questionController.js
+#### questionModule.js
 ``createQuestion(question)``
 
 question :
 
 - id (int),
 - serveyId (int),
-- questionTitle (string),
+- title (string),
+- type (string),
 - option (object) :
     - minValue(int)
     - maxValue(int)
@@ -126,7 +127,8 @@ Cette fonction récupère et affiche toute les question existante .
 questtion :
 
 - serveyId (int),
-- questionTitle (string),
+- title (string),
+- type (string),
 - option (object) :
     - minValue(int)
     - maxValue(int)
@@ -139,16 +141,15 @@ Cette fonction met à jour une question existante  en utilisant son ID.
 Cette fonction supprime une question de la base de données en utilisant son ID.
 
 
-#### answerController.js
+#### answerModule.js
 ``createAnswer(answer)``
 
 answer:
 
+- id (int),
 - questionId (int),
-- answerText (string),
-- response (objet) 
-    - name (string),
-    - email (string)
+- title (string),
+
 
 Cette fonction permet de créer une nouvelle réponse .
 
@@ -160,10 +161,8 @@ Cette fonction récupère et affiche toute les reponse existante .
 answer :
 
 - questionId (int),
-- answerText (string),
-- response (objet) 
-    - name (string),
-    - email (string)
+- title (string),
+
 
 Cette fonction met à jour une réponse existante en utilisant son ID.
 
